@@ -1,11 +1,22 @@
 package com.example.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.example.models.Genero;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +32,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"facultad", "telefonos", "correos"})
 @Builder
 public class Estudiante implements Serializable {
 
@@ -34,7 +45,21 @@ public class Estudiante implements Serializable {
     private String primerApellido;
     private String segundoApellido;
 
-    
+    private Genero genero;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fechaMatricula;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Facultad facultad;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "estudiante")
+    @Builder.Default
+    private Set<Telefono> telefonos = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "estudiante")
+    @Builder.Default
+    private Set<Correo> correos = new HashSet<>();    
 
 
     
