@@ -36,7 +36,7 @@ public class CorreoServiceImpl implements CorreoService {
     @Override
     public void deleteByEstudiante(Estudiante estudiante) {
         
-        correoDao.deleteByEstudiante(estudiante)
+        correoDao.deleteByEstudiante(estudiante);
     }
 
     @Override

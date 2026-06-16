@@ -10,7 +10,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.example.models.Genero;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -45,6 +48,9 @@ public class Estudiante implements Serializable {
     private String primerApellido;
     private String segundoApellido;
 
+    // de mi cosecha.
+    @Enumerated(EnumType.STRING)
+    @Column(name = "genero")
     private Genero genero;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
