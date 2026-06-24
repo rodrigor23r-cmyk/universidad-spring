@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>listado de estudiantes</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>listado de estudiantes</h1>
+
+    <div>
+        <a th:href="@{/estudiantes/alta}">Alta de un empleado</a>
+    </div>
+
+    <table>
+        <thead>
+            <th>nombre</th>
+            <th>apellido</th>
+            <th>segundo apellido</th>
+            <th>genero</th>
+            <th>fecha de matriculación</th>
+        </thead>
+        <tbody>
+            <tr th:each="estudiante : ${estudiantes}">
+                <td th:text="${estudiante.nombre}"></td>
+                <td th:text="${estudiante.primerApellido}"></td>
+                <td th:text="${estudiante.segundoApellido}"></td>
+                <td th:text="${estudiante.genero.name() == 'OTRO' ? '-' : estudiante.genero}"></td>
+                <td th:text="${estudiante.fechaMatricula}"></td>
+            </tr>
+    </table>
+</body>
+</html>

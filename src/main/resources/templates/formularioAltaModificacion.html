@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario estudiante</title>
+    <style>
+        .noseque {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .genero {
+            display: block;
+            align-items: center;
+        }
+        legend {
+            font-weight: bold;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="date"], input[type="radio"] {
+            width: 50%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Formulario alta o modificación</h1>
+    <fieldset class="noseque">
+        <legend>Formulario de alta o modificación</legend>
+        <form th:action="@{/estudiantes/persistir}" method="post" th:object="${estudiante}">
+            <div>
+                <input type="hidden" th:field="*{id}">
+            </div>
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required th:field="*{nombre}">
+            </div>
+            <div>
+                <label for="primerApellido">Primer apellido:</label>
+                <input type="text" id="primerApellido" name="primerApellido" required th:field="*{primerApellido}">
+            </div>
+            <div>
+                <label for="segundoApellido">Segundo apellido:</label>
+                <input type="text" id="segundoApellido" name="segundoApellido" required th:field="*{segundoApellido}">
+            </div>
+            <div>
+                <fieldset class="genero">
+                    <legend>Genero</legend>
+                    <label for="hombre">Hombre:</label>
+                    <input type="radio" id="hombre" name="genero" value="HOMBRE" th:field="*{genero}">
+                    <label for="mujer">Mujer:</label>
+                    <input type="radio" id="mujer" name="genero" value="MUJER" th:field="*{genero}">
+                    <label for="otro">Otro: </label>
+                    <input type="radio" id="otro" name="genero" value="OTRO" th:field="*{genero}">
+                </fieldset>
+            </div>
+            <div>
+                <label for="fechaMatricula">Fecha de matriculación:</label>
+                <input type="date" id="fechaMatricula" name="fechaMatricula" required th:field="*{fechaMatricula}">
+            </div>
+
+            <div>
+                <label for="numerosTelefono">Teléfonos:</label>
+                <input type="text" id="numerosTelefono" name="numerosTelefono" placeholder="Si son varios separa por ;"
+                    required>
+            </div>
+
+            <div>
+                <label for="direccionesCorreo">Correos:</label>
+                <input type="text" id="direccionesCorreo" name="direccionesCorreo"
+                    placeholder="Si son varios separa por ;" required>
+            </div>
+            <div>
+                <label for="facultades">Facultades:</label>
+                <select id="facultades" name="facultad" required>
+                    <option value=""></option>
+                    <option th:each="dpto : ${facultades}" th:value="${dpto.id}" th:text="${dpto.nombre}"></option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="Alta/Modificacion">
+            </div>
+        </form>
+    </fieldset>
+</body>
+
+</html>
