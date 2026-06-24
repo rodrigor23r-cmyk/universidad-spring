@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de estudiante</title>
+</head>
+<body>
+    <h1 th:text="'Detalles del estudiante ' + ${estudiante.nombre} + ' ' + ${estudiante.primerApellido} + ' ' + ${estudiante.segundoApellido}" ></h1>
+    <h2 th:text="'Género: ' + ${estudiante.genero.name()}"></h2>
+    <h2 th:text="'Fecha de matriculación: ' + ${#temporals.format(estudiante.fechaMatricula, 'dd/MM/yyyy')}"></h2>
+
+    <h2 th:text="'Facultad: ' + ${estudiante.facultad.nombre}" ></h2>
+    <div th:if="${estudiante.telefonos.size() != 0}">
+        <h2>Teléfonos</h2>
+        <ul>
+            <li th:each="telefono : ${estudiante.telefonos}" th:text="${telefono.numero}"></li>
+        </ul>
+    </div>
+        <div th:if="${estudiante.correos.size() != 0}">
+        <h2>Correos</h2>
+        <ul>
+            <li th:each="correo : ${estudiante.correos}" th:text="${correo.email}"></li>
+        </ul>
+    </div>
+    <div th:if="${estudiante.foto}">
+        <img th:src ="@{/imagenes/} + ${estudiante.foto}" alt="foto">
+    </div>
+</body>
+</html>
