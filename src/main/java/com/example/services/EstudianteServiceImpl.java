@@ -24,7 +24,7 @@ public class EstudianteServiceImpl implements EstudianteService {
     @Override
     public Estudiante getEstudianteById(int id) {
         
-        return estudianteDao.findById(id).orElseThrow(() -> new RuntimeException("Empleado con id: " + id + "no encontrado"));
+        return estudianteDao.findById(id).orElseThrow(() -> new RuntimeException("Estudiante con id: " + id + "no encontrado"));
     }
 
     @Override

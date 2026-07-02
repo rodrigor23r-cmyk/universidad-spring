@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>listado de profesores</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>listado de profesores</h1>
+
+    <div>
+        <a th:href="@{/profesores/alta}">Alta de un profesor</a>
+    </div>
+
+    <table>
+        <thead>
+            <th>nombre</th>
+            <th>apellido</th>
+            <th>segundo apellido</th>
+            <th>facultad</th>
+            <th>genero</th>
+            <th>fecha de alta</th>
+            <th>salario</th>
+            <th>detalles</th>
+            <th>modificar</th>
+            <th>borrar</th>
+        </thead>
+        <tbody>
+            <tr th:each="profesor : ${profesores}">
+                <td th:text="${profesor.nombre}"></td>
+                <td th:text="${profesor.primerApellido}"></td>
+                <td th:text="${profesor.segundoApellido}"></td>
+                <td th:text="${profesor.facultad.nombre}"></td>
+                <td th:text="${profesor.genero.name()}"></td>
+                <td th:text="${profesor.fechaAlta}"></td>
+                <td th:text="${profesor.salario}"></td>
+                <td><a th:href="@{/profesores/details/} + ${profesor.id}">Detalles</a></td>
+                <td><a th:href="@{/profesores/update/} + ${profesor.id}">Modificar</a></td>
+                <td><a th:href="@{/profesores/delete/} + ${profesor.id}">Eliminar</a></td>
+            </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de profesor</title>
+</head>
+<body>
+    <h1 th:text="'Detalles del profesor ' + ${profesor.nombre} + ' ' + ${profesor.primerApellido} + ' ' + ${profesor.segundoApellido}" ></h1>
+    <h2 th:text="'Género: ' + ${profesor.genero.name()}"></h2>
+    <h2 th:text="'Fecha de Alta: ' + ${#temporals.format(profesor.fechaAlta, 'dd/MM/yyyy')}"></h2>
+    <h2 th:text="'Salario: ' + ${profesor.salario}"></h2>
+
+    <h2 th:text="'Facultad: ' + ${profesor.facultad.nombre}" ></h2>
+    <div th:if="${profesor.foto}">
+        <img th:src ="@{/imagenes/} + ${profesor.foto}" alt="foto">
+    </div>
+</body>
+</html>

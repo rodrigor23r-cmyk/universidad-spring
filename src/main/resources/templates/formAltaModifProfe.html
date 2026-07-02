@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario profesor</title>
+<style>
+        .noseque {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .genero {
+        }
+        legend {
+            font-weight: bold;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="date"], input[type="radio"] {
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Formulario alta o modificación</h1>
+    <fieldset class="noseque">
+        <legend>Formulario de alta o modificación</legend>
+        <form th:action="@{/profesores/persistir}" method="post" th:object="${profesor}" enctype="multipart/form-data">
+            <div>
+                <input type="hidden" th:field="*{id}">
+            </div>
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required th:field="*{nombre}">
+                <p class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
+            </div>
+            <div>
+                <label for="primerApellido">Primer apellido:</label>
+                <input type="text" id="primerApellido" name="primerApellido" required th:field="*{primerApellido}">
+                <p class="error" th:if="${#fields.hasErrors('primerApellido')}" th:errors="*{primerApellido}"></p>
+            </div>
+            <div>
+                <label for="segundoApellido">Segundo apellido:</label>
+                <input type="text" id="segundoApellido" name="segundoApellido" required th:field="*{segundoApellido}">
+                <p class="error" th:if="${#fields.hasErrors('segundoApellido')}" th:errors="*{segundoApellido}"></p>
+            </div>
+            <div>
+                <fieldset class="genero">
+                    <legend>Genero</legend>
+                    <label for="hombre">Hombre:</label>
+                    <input type="radio" id="hombre" name="genero" value="HOMBRE" th:field="*{genero}">
+                    <label for="mujer">Mujer:</label>
+                    <input type="radio" id="mujer" name="genero" value="MUJER" th:field="*{genero}">
+                    <label for="otro">Otro: </label>
+                    <input type="radio" id="otro" name="genero" value="OTRO" th:field="*{genero}">
+                </fieldset>
+            </div>
+            <div>
+                <label for="fechaAlta">Fecha de alta:</label>
+                <input type="date" id="fechaAlta" name="fechaAlta" required th:field="*{fechaAlta}">
+                <p class="error" th:if="${#fields.hasErrors('fechaAlta')}" th:errors="*{fechaAlta}"></p>
+            </div>
+            <div>
+                <label for="salario">Salario:</label>
+                <input type="text" id="salario" name="salario" required th:field="*{salario}">
+                <p class="error" th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></p>
+            </div>
+            <div>
+                <label for="facultades">Facultades:</label>
+                <select id="facultades" name="facultad" required th:field="*{facultad}">
+                    <option value=""></option>
+                    <option th:each="dpto : ${facultades}" th:value="${dpto.id}" th:text="${dpto.nombre}"></option>
+                </select>
+            </div>
+            <br>
+             <div>
+                <label for="file">Foto del profesor</label>
+                <input type="file" id="file" name="file" title="Selección de la imagen profesor">
+            </div>
+            <div th:if="${profesor.id !=0 and profesor.foto != null}">
+                    <h4>foto actual del profesor:</h4>
+                    <img th:src ="@{/imagenes/} + ${profesor.foto}" alt="foto">
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="Alta/Modificacion">
+            </div>
+        </form>
+    </fieldset>
+</body>
+
+</html>
