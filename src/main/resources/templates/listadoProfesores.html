@@ -41,7 +41,7 @@
                 <td th:text="${profesor.primerApellido}"></td>
                 <td th:text="${profesor.segundoApellido}"></td>
                 <td th:text="${profesor.facultad.nombre}"></td>
-                <td th:text="${profesor.genero.name()}"></td>
+                <td th:text="${profesor.genero}"></td>
                 <td th:text="${profesor.fechaAlta}"></td>
                 <td th:text="${profesor.salario}"></td>
                 <td><a th:href="@{/profesores/details/} + ${profesor.id}">Detalles</a></td>
